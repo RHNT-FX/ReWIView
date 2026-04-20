@@ -52,7 +52,7 @@ Proyek ini masih terus dikembangkan. Beberapa fitur yang direncanakan untuk pemb
 - [ ] **Notifikasi Bot Telegram:** Mengirimkan peringatan otomatis secara *real-time* ke *smartphone* jika terdeteksi pergerakan saat ruangan sedang ditinggalkan.
 - [ ] **Sistem Multi-Node:** Menggunakan beberapa ESP32 sekaligus di sudut ruangan yang berbeda untuk meningkatkan akurasi dan mendeteksi arah pergerakan manusia.
 - [ ] **Penyimpanan Riwayat (Data Logging):** Menyimpan data waktu pergerakan ke *database* eksternal dan menampilkannya sebagai grafik riwayat mingguan/bulanan di *dashboard*.
-- [ ] **Update UI Pada Web Dashboard:** Memperbarui web dashboard agar lebih ramah dan mudah dimengerti untuk khalayak awam.
+- [ ] **Update UI Pada Web Dashboard:** Memperbarui *web dashboard* agar lebih ramah dan mudah dimengerti untuk khalayak awam.
 
 ---
 
