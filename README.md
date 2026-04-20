@@ -1,6 +1,6 @@
-# 📡 ESP32 SmartHome Presence Detector (Device-Free WiFi Sensing)
+# 📡 ReWIView ESP32 SmartHome Presence Detector 
 
-Proyek ini adalah sistem pendeteksi keberadaan manusia (*Human Presence Detection*) berbasis **ESP32** yang bekerja secara **pasif dan *device-free***. Sistem ini tidak memerlukan sensor gerak konvensional (seperti PIR) atau kamera, melainkan memanfaatkan fluktuasi sinyal WiFi (*Received Signal Strength Indicator* / RSSI) untuk mendeteksi pergerakan di dalam ruangan.
+Proyek ini adalah sistem pendeteksi keberadaan manusia (*Human Presence Detection*) berbasis **ESP32** yang bekerja secara **pasif dan *device-free***. Sistem ini tidak memerlukan sensor gerak konvensional seperti PIR atau kamera, melainkan memanfaatkan fluktuasi sinyal WiFi (*Received Signal Strength Indicator* / RSSI) untuk mendeteksi pergerakan di dalam ruangan.
 
 Dilengkapi dengan *dashboard* antarmuka web yang modern, responsif, dan *real-time* menggunakan WebSocket, semua langsung di-*serve* dari memori (flash) ESP32!
 
@@ -32,7 +32,7 @@ Pastikan kamu sudah menginstal library berikut di Arduino IDE / PlatformIO:
 
 ## 🚀 Cara Penggunaan
 
-1. *Clone* repositori ini ke komputer kamu.
+1. Clone repositori ini ke komputer kamu.
 2. Buka *source code* (`.ino` atau `main.cpp`).
 3. Ubah konfigurasi WiFi pada baris berikut sesuai dengan jaringan kamu:
    ```cpp
@@ -42,3 +42,12 @@ Pastikan kamu sudah menginstal library berikut di Arduino IDE / PlatformIO:
 4. Upload kode ke board ESP32 kamu.
 5. Buka Serial Monitor (baud rate: 115200) untuk melihat IP Address yang didapatkan oleh ESP32.
 6. Buka IP Address tersebut di browser (misal: http://192.168.1.15).
+
+## 📚 Academic References / Referensi
+Proyek ini dibangun berdasarkan konsep **Device-Free Human Presence Detection (DFP)**. Algoritma deteksi pada proyek ini memanfaatkan fluktuasi sinyal WiFi (*Received Signal Strength Indicator* / RSSI). Penggunaan *variance thresholding* pada array RSSI untuk mendeteksi pergerakan manusia secara pasif didukung oleh literatur berikut:
+1. **Deprez, F., et al.** "Detection of presence and number of persons by a Wi-Fi signal: a practical RSSI-based approach." *arXiv preprint* (2023). 
+Membuktikan bahwa perhitungan varians/standar deviasi dari nilai RSSI efektif untuk deteksi keberadaan manusia.
+2. **Zain, A. S. M., et al.** "RSSI-based Human Presence Detection System for Energy Saving Automation." *International Journal of Engineering & Technology* (2018). 
+Membahas implementasi algoritma statistik pada modul WiFi low-cost untuk smart home.
+3. **Anisha, A., et al.** "Device-Free Human Motion Detection using WiFi Measurements for Building Energy Management." (2024). 
+Menyoroti penggunaan mikrokontroler ESP32 sebagai sensor pasif berbasis RSSI yang akurat dan hemat biaya.
