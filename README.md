@@ -43,6 +43,19 @@ Pastikan kamu sudah menginstal library berikut di Arduino IDE / PlatformIO:
 5. Buka Serial Monitor (baud rate: 115200) untuk melihat IP Address yang didapatkan oleh ESP32.
 6. Buka IP Address tersebut di browser (misal: http://192.168.1.15).
 
+---
+
+## 👨‍🔧 Rencana Pengembangan (Roadmap)
+
+Proyek ini masih terus dikembangkan. Beberapa fitur yang direncanakan untuk pembaruan di masa mendatang antara lain:
+
+- [ ] **Notifikasi Bot Telegram:** Mengirimkan peringatan otomatis secara *real-time* ke *smartphone* jika terdeteksi pergerakan saat ruangan sedang ditinggalkan.
+- [ ] **Sistem Multi-Node:** Menggunakan beberapa ESP32 sekaligus di sudut ruangan yang berbeda untuk meningkatkan akurasi dan mendeteksi arah pergerakan manusia.
+- [ ] **Penyimpanan Riwayat (Data Logging):** Menyimpan data waktu pergerakan ke *database* eksternal dan menampilkannya sebagai grafik riwayat mingguan/bulanan di *dashboard*.
+- [ ] **Update UI Pada Web Dashboard:** Memperbarui web dashboard agar lebih ramah dan mudah dimengerti untuk khalayak awam.
+
+---
+
 ## 📚 Academic References / Referensi
 Proyek ini dibangun berdasarkan konsep **Device-Free Human Presence Detection (DFP)**. Algoritma deteksi pada proyek ini memanfaatkan fluktuasi sinyal WiFi (*Received Signal Strength Indicator* / RSSI). Penggunaan *variance thresholding* pada array RSSI untuk mendeteksi pergerakan manusia secara pasif didukung oleh literatur berikut:
 1. **Deprez, F., et al.** "Detection of presence and number of persons by a Wi-Fi signal: a practical RSSI-based approach." *arXiv preprint* (2023). 
@@ -51,3 +64,5 @@ Membuktikan bahwa perhitungan varians/standar deviasi dari nilai RSSI efektif un
 Membahas implementasi algoritma statistik pada modul WiFi low-cost untuk smart home.
 3. **Anisha, A., et al.** "Device-Free Human Motion Detection using WiFi Measurements for Building Energy Management." (2024). 
 Menyoroti penggunaan mikrokontroler ESP32 sebagai sensor pasif berbasis RSSI yang akurat dan hemat biaya.
+
+---
