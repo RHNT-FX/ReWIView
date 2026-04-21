@@ -78,8 +78,8 @@ const char HTML_PAGE[] PROGMEM = R"rawliteral(
 </style>
 </head>
 <body>
-<h1>SmartHome Presence</h1>
-<p class="sub">ESP32-C3 WiFi Sensor &mdash; Real-time</p>
+<h1>ReWIVew</h1>
+<p class="sub">ESP32 WiFi Sensor &mdash; Real-time</p>
 <span class="conn err" id="conn">Menghubungkan...</span>
 
 <div class="status-card absent" id="card">
