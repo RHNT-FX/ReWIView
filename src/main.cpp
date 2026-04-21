@@ -1,11 +1,8 @@
 #include <Arduino.h>
 #include <WiFi.h>
+#include <WiFiManager.h>
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
-
-// setting ssid dan pw pada wifi
-const char* SSID     = "Joglo Kost";
-const char* PASSWORD = "tanyaibukost";
 
 // Threshold: variance RSSI di atas ini = terdeteksi ada orang
 const float VARIANCE_THRESHOLD = 8.0;  // variance RSSI 
@@ -21,6 +18,8 @@ int   bufferIndex  = 0;
 bool  humanPresent = false;
 float lastVariance = 0;
 unsigned long lastScan = 0;
+unsigned long lastBroadcast = 0; // throttle websocket updates
+bool bufferFull = false;
 
 // hitung variance dari buffer RSSI
 float calculateVariance() {
@@ -153,10 +152,18 @@ window.addEventListener('resize', drawChart);
 void setup() {
   Serial.begin(115200);
   delay(3000);
-  WiFi.begin(SSID, PASSWORD);
-  Serial.print("Menghubungkan ke WiFi");
-  while (WiFi.status() != WL_CONNECTED) { delay(500); Serial.print("."); }
-  Serial.println("\nTerhubung! IP: " + WiFi.localIP().toString());
+
+  WiFiManager wm;
+  // Jika gagal terhubung, ESP32 akan membuat AP "SmartHome-Setup"
+  bool res = wm.autoConnect("SmartHome-Setup");
+  if(!res) {
+      Serial.println("Gagal terhubung dan kehabisan waktu!");
+      // Restart jika gagal
+      ESP.restart();
+  }
+  else {
+      Serial.println("\nTerhubung! IP: " + WiFi.localIP().toString());
+  }
 
   // inisialisasi buffer RSSI
   for (int i = 0; i < SAMPLE_SIZE; i++) rssiBuffer[i] = WiFi.RSSI();
@@ -193,14 +200,26 @@ void loop() {
     rssiBuffer[bufferIndex] = WiFi.RSSI();
     bufferIndex = (bufferIndex + 1) % SAMPLE_SIZE;
 
-    if (bufferIndex == 0) {   // buffer penuh, hitung variance
+    if (bufferIndex == 0) {
+      bufferFull = true;
+    }
+
+    if (bufferFull) {   // jika buffer sudah penuh sekali, gunakan algoritma sliding window
       lastVariance = calculateVariance();
       bool detected = (lastVariance > VARIANCE_THRESHOLD);
+      bool statusChanged = false;
+
       if (detected != humanPresent) {
         humanPresent = detected;
+        statusChanged = true;
         Serial.println(humanPresent ? ">>> ADA ORANG" : ">>> RUANGAN KOSONG");
       }
-      broadcastStatus();
+
+      // Update setiap 450ms atau saat status berubah, untuk menghemat resource ESP32 & mengurangi traffic WebSocket
+      if (statusChanged || millis() - lastBroadcast >= 450) {
+        broadcastStatus();
+        lastBroadcast = millis();
+      }
     }
   }
   ws.cleanupClients();
