@@ -4,8 +4,8 @@
 #include <ArduinoJson.h>
 
 // setting ssid dan pw pada wifi
-const char* SSID     = "Joglo Kost";
-const char* PASSWORD = "tanyaibukost";
+const char* SSID     = "SSID NAME";
+const char* PASSWORD = "SSID PASS";
 
 // Threshold: variance RSSI di atas ini = terdeteksi ada orang
 const float VARIANCE_THRESHOLD = 8.0;  // variance RSSI 
