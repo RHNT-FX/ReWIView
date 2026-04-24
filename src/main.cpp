@@ -4,6 +4,10 @@
 #include <ESPAsyncWebServer.h>
 #include <ArduinoJson.h>
 
+// setting ssid dan pw pada wifi
+const char* SSID     = "SSID NAME";
+const char* PASSWORD = "SSID PASS";
+
 // Threshold: variance RSSI di atas ini = terdeteksi ada orang
 const float VARIANCE_THRESHOLD = 8.0;  // variance RSSI 
 const int   SAMPLE_SIZE        = 20;   // jumlah sample RSSI per deteksi
@@ -77,8 +81,8 @@ const char HTML_PAGE[] PROGMEM = R"rawliteral(
 </style>
 </head>
 <body>
-<h1>SmartHome Presence</h1>
-<p class="sub">ESP32-C3 WiFi Sensor &mdash; Real-time</p>
+<h1>ReWIVew</h1>
+<p class="sub">ESP32 WiFi Sensor &mdash; Real-time</p>
 <span class="conn err" id="conn">Menghubungkan...</span>
 
 <div class="status-card absent" id="card">
